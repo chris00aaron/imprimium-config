@@ -1,0 +1,42 @@
+server:
+  port: 0
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5438/db_certificacion
+    username: postgres
+    password: 1234
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      register-mbeans: true
+      maximum-pool-size: 5
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+  boot:
+    admin:
+      client:
+        url: http://localhost:8089
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+      show-components: always
+  tracing:
+    sampling:
+      probability: 1.0
+eureka:
+  instance:
+    instance-id: ${spring.application.name}-${random.uuid}
+    health-check-url-path: /actuator/health
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
