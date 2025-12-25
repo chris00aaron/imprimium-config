@@ -9,9 +9,13 @@ spring:
     hikari:
       register-mbeans: true
       maximum-pool-size: 5
+  sql:
+    init:
+      mode: always
   jpa:
     hibernate:
       ddl-auto: create
+    defer-datasource-initialization: true
     show-sql: true
     properties:
       hibernate:
